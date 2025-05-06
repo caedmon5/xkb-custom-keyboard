@@ -2,12 +2,14 @@
 
 ## Overview
 
-This repository provides files and documentation to help users create and install custom keyboard layouts on Linux systems using X11. It supports:
+This repository provides files and documentation to help users create and install custom keyboard layouts on Linux systems using X11, based on the popular and long-standing(since Dec. 2006) guide, [Custom Keyboard in Linux/X11](https://people.uleth.ca/~daniel.odonnell/blog/custom-keyboard-in-linuxx11)
 
-* Custom symbol files
-* Layout registration through `evdev.xml`
-* Persistent third-level chooser and compose key setup
-* Troubleshooting for layout activation
+The guide instructs you in how to
+
+* Build custom keyboard symbol/layout files (and provides a model suitable for work in Germanic Philology, `symbols/oe`)
+* Register your layout for internal system use through `evdev.xml`
+* Create a persistent third-level chooser and compose key setup
+* Troubleshoot various issues for layout activation
 
 The method described has been tested and refined over many years by users working with specialist character sets (e.g. IPA, Old English, Unicode diacritics).
 
@@ -29,7 +31,7 @@ The method described has been tested and refined over many years by users workin
 To implement a layout exactly the same as the one I use (i.e. with characters suitable for working in early Germanic philology):
 
 1. Copy `symbols/oe` to `/usr/share/X11/xkb/symbols/`
-2. Append the layout block to `/usr/share/X11/xkb/rules/evdev.xml`
+2. Append an appropriate layout block to `/usr/share/X11/xkb/rules/evdev.xml`
 3. Run `udevadm trigger --subsystem-match=input --action=change` or reboot
 4. Optional: Use GNOME settings or Tweaks to add the layout and assign third-level/compose keys (these are already defined in `oe` and probably not necessary if you are using my layout)
 
@@ -67,5 +69,5 @@ This repository is licensed under CC BY-NC-SA 3.0 unless otherwise noted.
 
 ---
 
-* For advanced documentation, see `docs/CUSTOM_KEYBOARDS.md` and `docs/TROUBLESHOOTING.md`.
+* For advanced documentation and troubleshooting, including an updated summary of the [original guide](https://people.uleth.ca/~daniel.odonnell/blog/custom-keyboard-in-linuxx11), see [`docs/CUSTOM_KEYBOARDS.md`](docs/CUSTOM_KEYBOARDS.md) and [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md).
 * A historical overview of the guide itself can be found in `docs/HISTORICAL_OVERVIEW.md`.
