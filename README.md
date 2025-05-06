@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository provides files and documentation to help users create and install custom keyboard layouts on Linux systems using X11, based on the popular and long-standing(since Dec. 2006) guide, [Custom Keyboard in Linux/X11](https://people.uleth.ca/~daniel.odonnell/blog/custom-keyboard-in-linuxx11)
+This repository provides files and documentation to help users create and install custom keyboard layouts on Linux systems using X11, based on the popular and long-standing(since Dec. 2006) guide, [Custom Keyboard in Linux/X11](https://people.uleth.ca/~daniel.odonnell/blog/custom-keyboard-in-linuxx11) (a summary of the original guide can be found in [`docs/CUSTOM_KYEBOARDS.md`](docs/CUSTOM_KYEBOARDS.md)
 
 The guide instructs you in how to
 
