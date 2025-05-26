@@ -72,5 +72,7 @@ default partial xkb_symbols "basic" {
     // Set Right Alt as Compose (Multi_key)
     key <RALT> { [ Multi_key ] };
 
+include "level3(rctrl_switch)"
+
 };
 
