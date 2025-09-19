@@ -57,11 +57,54 @@ udevadm trigger --subsystem-match=input --action=change
 
 ## Issues
 
-If the layout fails to load or does not appear in the input selector:
+* If the layout fails to load or does not appear in the input selector:
 
-* Check the `evdev.xml` layout block placement
-* Confirm variant names match in your `setxkbmap` or GUI selector
-* See [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) for help
+** Check the `evdev.xml` layout block placement
+** Confirm variant names match in your `setxkbmap` or GUI selector
+** See [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) for help
+
+### dead_macron + æ/Æ does not produce ǣ/Ǣ
+
+**The problem:** To add a macron above a character using my keyboard files, you use a compose key (right-alt in my keyboard) + the minus key + the letter you want to have the macron over. So right-alt+-+a give you ā. 
+
+This doesn't work with æ or Æ. 
+
+**Why:** X11’s default Compose tables do not define rules for `<dead_macron> <ae|AE>` → ǣ/Ǣ, so layouts that happily compose macrons on vowels won’t handle the ligature by default.
+
+**Two solutions (choose either or both):**
+
+- **Compose route (keeps your compose workflow).**  
+  Create or edit `~/.XCompose`:
+
+  ```text
+  # Locale-aware include (inherits defaults for your locale)
+  include "%L"
+
+  <dead_macron> <ae> : "ǣ" U01E3
+  <dead_macron> <AE> : "Ǣ" U01E2
+
+  # Optional: Multi_key (Right Alt) sequences
+  <Multi_key> <minus> <ae> : "ǣ" U01E3
+  <Multi_key> <minus> <AE> : "Ǣ" U01E2
+  ```
+
+  If `%L` does not work in your environment, use the explicit path instead:
+
+  ```text
+  include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+  ```
+
+  Restart apps (or log out/in) so Compose reloads.
+
+- **XKB symbols route (direct keys, no composing).**  
+  Assign ǣ/Ǣ to spare levels in your layout:
+
+  ```xkb
+  // Example: put ǣ/Ǣ on Level3/4 of <AD03> (E key)
+  key <AD03> { [ e, E, U01E3, U01E2 ] };
+  ```
+
+
 
 ## License
 

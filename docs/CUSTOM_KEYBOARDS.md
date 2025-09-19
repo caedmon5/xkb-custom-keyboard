@@ -80,6 +80,44 @@ key <RALT> { [ Multi_key ] };
 
 Again, if this is already defined in your layout file, you do not need to repeat it using GUI tools or desktop settings.
 
+## 5.1 Composing on ligatures (æ/Æ) vs. assigning precomposed glyphs
+
+By default, X11 Compose rules **do not** include `<dead_macron> <ae|AE>` → ǣ/Ǣ.  
+If your layout uses a dead macron for ā, ē, ī, ō, ū, you must explicitly add æ/Æ.
+
+**Option A — Keep composition (recommended):**
+
+Create or edit `~/.XCompose`:
+
+```text
+# Locale-aware include
+include "%L"
+
+<dead_macron> <ae> : "ǣ" U01E3
+<dead_macron> <AE> : "Ǣ" U01E2
+```
+
+If `%L` fails, use an explicit path:
+
+```text
+include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+```
+
+(Optionally also expose `Multi_key` sequences if you use a Compose key.)
+
+**Option B — Direct assignment in XKB (no Compose):**
+
+Map ǣ/Ǣ to higher levels of a convenient key:
+
+```xkb
+key <AD03> { [ e, E, U01E3, U01E2 ] };
+```
+
+**Notes:**
+- Prefer the precomposed characters `U01E3`/`U01E2` over `æ + U+0304`. Many apps/fonts misplace combining marks on ligatures.
+- Ensure your UI fonts support these code points (Noto, DejaVu, etc.).
+
+
 ## 6. Using the Layout
 
 To test your layout:

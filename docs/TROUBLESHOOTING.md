@@ -70,7 +70,41 @@ key <RALT> { [ Multi_key ] };
 
 This method avoids the risk of duplicating `include` statements and allows persistent modifier assignment across sessions. Ensure this block is inside your `xkb_symbols "..."` definition.
 
-### 4. Changes don't take effect
+### 4. dead_macron + æ/Æ yields plain æ + combining macron (or nothing)
+
+**Symptoms:** Your dead-macron works on vowels (ā, ē, …) but not on æ/Æ.
+
+**Cause:** No default Compose rule for `<dead_macron> <ae|AE>`.
+
+**Fix (Compose):**
+
+```text
+include "%L"
+
+<dead_macron> <ae> : "ǣ" U01E3
+<dead_macron> <AE> : "Ǣ" U01E2
+```
+
+If `%L` fails, use:
+
+```text
+include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+```
+
+Restart apps / relogin.
+
+**Alternative (XKB direct mapping):**
+
+```xkb
+key <AD03> { [ e, E, U01E3, U01E2 ] };
+```
+
+**Checks:**
+- `xev` shows dead_macron then æ/Æ before composition.
+- The result is U+01E3 / U+01E2, not æ + U+0304.
+- Your font supports ǣ/Ǣ.
+
+### 5. Changes don't take effect
 
 **Cause:** X11 caching or stale configuration.
 
@@ -89,7 +123,7 @@ sudo dpkg-reconfigure xkb-data
 reboot
 ```
 
-### 5. Debugging the keyboard mapping
+### 6. Debugging the keyboard mapping
 
 Use `xev` to see how your keys are interpreted:
 

@@ -4,6 +4,30 @@ This document lists useful software, utilities, and documentation for designing,
 
 ### A. Configuration and Testing Tools
 
+* **Compose (~/.XCompose)**
+  User-level override for multi-key sequences. Useful for adding rules missing from system tables, e.g. `<dead_macron> <ae>` → ǣ.
+
+  Example `~/.XCompose`:
+
+  ```text
+  include "%L"
+
+  <dead_macron> <ae> : "ǣ" U01E3
+  <dead_macron> <AE> : "Ǣ" U01E2
+  ```
+
+  Or explicit path if needed:
+
+  ```text
+  include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+  ```
+
+  Quick check:
+
+  ```bash
+  printf 'ǣ Ǣ\n'
+  ```
+
 * **xev**
   A utility to display X11 events, including keypresses. Useful for verifying key mappings and modifiers.
 
