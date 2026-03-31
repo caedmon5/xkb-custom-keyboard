@@ -16,8 +16,8 @@ default partial xkb_symbols "basic" {
     key <AE06>    { [ 6,    asciicircum,    threequarters,    fiveeighths ] };
     key <AE07>    { [ 7,    ampersand,    paragraph,    seveneighths ] };
     key <AE08>    { [ 8,    asterisk,    U0307,    trademark ] };
-    key <AE09>    { [ 9,    parenleft,    bracketright,    plusminus ] };
-    key <AE10>    { [ 0,    parenright,    braceright,    degree ] };
+    key <AE09>    { [ 9,    parenleft,    U2205,    plusminus ] };
+    key <AE10>    { [ 0,    parenright,    U0336,    degree ] };
     key <AE11>    { [ minus,    underscore,    U2014,    questiondown ] };
     key <AE12>    { [ equal,    plus,    dead_cedilla,    dead_ogonek ] };
 
